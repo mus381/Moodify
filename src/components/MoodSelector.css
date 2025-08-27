@@ -1,0 +1,26 @@
+.mood-selector-container {
+  display: flex; /* Lay out the cards in a row */
+  justify-content: center; /* Center the cards horizontally */
+  gap: 20px; /* Add space between the cards */
+  flex-wrap: wrap; /* Allow cards to wrap to the next line on smaller screens */
+  margin-bottom: 3rem; /* Add some space below the selector */
+}
+
+.mood-card {
+  background-color: #282828; /* A slightly lighter dark shade */
+  border: 1px solid #404040; /* Subtle border */
+  color: #FFFFFF;
+  padding: 1rem 2rem; /* Generous padding */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer; /* Change cursor to a pointer on hover */
+  transition: all 0.2s ease-in-out; /* Smooth transition for hover effects */
+}
+
+/* The magic happens here */
+.mood-card:hover {
+  transform: translateY(-5px); /* Lift the card up slightly */
+  background-color: #1DB954; /* Spotify's signature green */
+  border-color: #1DB954;
+}

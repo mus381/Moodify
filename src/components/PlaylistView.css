@@ -1,0 +1,38 @@
+.playlist-container {
+  width: 100%;
+  max-width: 600px; /* Constrain the width for a cleaner look */
+  margin-top: 2rem;
+}
+
+.playlist-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: left; /* Align the title to the left */
+}
+
+.playlist {
+  list-style-type: none; /* Remove the default list bullets */
+  text-align: left;
+}
+
+.track {
+  display: flex; /* Use flexbox to align title and artist */
+  justify-content: space-between; /* Push them to opposite ends */
+  padding: 0.75rem 1rem;
+  background-color: #181818;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.track:hover {
+  background-color: #282828; /* Slightly lighten the track on hover */
+}
+
+.track-title {
+  font-weight: 600;
+}
+
+.track-artist {
+  color: #b3b3b3; /* A lighter grey for the artist name */
+}
