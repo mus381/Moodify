@@ -1,24 +1,23 @@
 import React from 'react';
 import './PlaylistView.css'; // We'll create this next
 
-// Let's create some fake song data to work with
-const fakePlaylist = [
-  { id: 1, title: 'Bohemian Rhapsody', artist: 'Queen' },
-  { id: 2, title: 'Stairway to Heaven', artist: 'Led Zeppelin' },
-  { id: 3, title: 'Hotel California', artist: 'Eagles' },
-  { id: 4, title: 'Sweet Child O\' Mine', artist: 'Guns N\' Roses' },
-  { id: 5, title: 'Smells Like Teen Spirit', artist: 'Nirvana' },
-];
 
-const PlaylistView = () => {
+const PlaylistView = ({ tracks }) => {
+
+  // Add a check in case there are no tracks yet
+  if (!tracks || tracks.length === 0) {
+    return <p>Select a mood to generate a playlist!</p>;
+  }
   return (
     <div className="playlist-container">
       <h2>Generated Playlist</h2>
       <ul className="playlist">
-        {fakePlaylist.map((track) => (
+      {/* Map over the tracks from props */}
+        {tracks.map(({ track }) => (
           <li key={track.id} className="track">
-            <span className="track-title">{track.title}</span>
-            <span className="track-artist">{track.artist}</span>
+            <span className="track-title">{track.name}</span>
+            <span className="track-artist">{track.artists[0].name}</span>
+       
           </li>
         ))}
       </ul>
@@ -27,3 +26,5 @@ const PlaylistView = () => {
 };
 
 export default PlaylistView;
+
+

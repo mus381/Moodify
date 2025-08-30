@@ -1,16 +1,16 @@
 import React from 'react';
 import './MoodSelector.css'; // We will create this file next
 
-const MoodSelector = () => {
+const MoodSelector = ({ onMoodSelected }) => {
   // Array of moods to create buttons dynamically
   const moods = ['Happy', 'Chill', 'Focus', 'Workout', 'Sad'];
 
   return (
     <div className="mood-selector-container">
       {moods.map((mood) => (
-        <button key={mood} className="mood-card">
+    <button key={mood} className="mood-card" onClick={() => onMoodSelected(mood.toLowerCase())}>
           {mood}
-        </button>
+        </button>     
       ))}
     </div>
   );
