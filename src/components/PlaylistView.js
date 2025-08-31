@@ -1,30 +1,35 @@
 import React from 'react';
-import './PlaylistView.css'; // We'll create this next
-
+import { motion } from 'framer-motion';
+import './PlaylistView.css';
 
 const PlaylistView = ({ tracks }) => {
 
-  // Add a check in case there are no tracks yet
+  // A check in case the component is rendered with no tracks
   if (!tracks || tracks.length === 0) {
-    return <p>Select a mood to generate a playlist!</p>;
+    // We return null instead of a message because App.js now handles the initial state
+    return null;
   }
+
   return (
-    <div className="playlist-container">
+    <motion.div
+      className="playlist-container"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }} // Defines how it animates out
+      transition={{ duration: 0.5 }}
+    >
       <h2>Generated Playlist</h2>
       <ul className="playlist">
-      {/* Map over the tracks from props */}
         {tracks.map(({ track }) => (
-          <li key={track.id} className="track">
+          // Use track.id if available, otherwise fallback to uri for a unique key
+          <li key={track.id || track.uri} className="track">
             <span className="track-title">{track.name}</span>
             <span className="track-artist">{track.artists[0].name}</span>
-       
           </li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 };
 
 export default PlaylistView;
-
-
