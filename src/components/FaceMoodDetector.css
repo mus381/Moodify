@@ -1,0 +1,27 @@
+.face-detector-container {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 500px;
+  border-top: 1px solid #404040;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.face-detector-container p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+}

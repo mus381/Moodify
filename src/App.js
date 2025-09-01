@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import './App.css';
-import MoodInput from './components/MoodInput';     
+import MoodInput from './components/MoodInput'; 
+import FaceMoodDetector from './components/FaceMoodDetector';    
 import MoodSelector from './components/MoodSelector';
 import PlaylistView from './components/PlaylistView';
 
@@ -9,7 +10,7 @@ function App() {
   const [tracks, setTracks] = useState([]);
 
   // This is where you will paste your new token each time it expires.
-  const accessToken = 'BQClZisbSlioqd8JoX0OTcn0cbzIDJfh5ELS-UQStQ6ve3DJM8XyKchw4Z2GNI1gMfgJ5zcW_kecmTqaa_C8xuCyByagxf60mj5zaKKVHP11lEBZl4y8HVBNSymoK-gBTyozp7V32E8';
+  const accessToken = 'BQDdK2RY8p-mDaQmKEpkKp3HVz9MPJT4szyOmOfsuAp26MFcrUj_INegYdLMvHmz1lRzSiEWM2CHSafC9XKvPPiDau_nCmdCXcbbWvR1C9LNgbbHpqkYlIc7mJju84DBx1Crr1zn-Rs';
 
   const getPlaylist = async (mood) => {
     const searchUrl = `https://api.spotify.com/v1/search?q=${mood}&type=playlist&limit=1`;
@@ -57,15 +58,16 @@ function App() {
     }
   };
 
-  // ... inside the App.js component ...
+  // ... inside App.js component ...
 
   return (
     <div className="App">
       <h1>Moodify</h1>
       <MoodSelector onMoodSelected={getPlaylist} />
-
-      {/* --- ADD THE NEW COMPONENT HERE --- */}
       <MoodInput onMoodDetected={getPlaylist} />
+      
+      {/* --- ADD THE NEW COMPONENT HERE --- */}
+      <FaceMoodDetector onMoodDetected={getPlaylist} />
 
       <AnimatePresence>
         {tracks.length > 0 && (
