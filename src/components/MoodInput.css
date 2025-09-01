@@ -1,0 +1,44 @@
+.mood-input-container {
+  margin-top: 3rem;
+  width: 100%;
+  max-width: 500px;
+  border-top: 1px solid #404040;
+  padding-top: 2rem;
+}
+
+.mood-input-container p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.mood-input-box {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #404040;
+  background-color: #282828;
+  color: #FFFFFF;
+  margin-bottom: 1rem;
+}
+
+.mood-input-box:focus {
+  outline: none;
+  border-color: #1DB954; /* Highlight with Spotify green on focus */
+}
+
+.analyze-button {
+  background-color: #1DB954; /* Spotify Green */
+  border: none;
+  color: #FFFFFF;
+  padding: 0.8rem 1.5rem;
+  border-radius: 500px; /* Fully rounded button */
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.analyze-button:hover {
+  transform: scale(1.05);
+}

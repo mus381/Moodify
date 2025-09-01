@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import './App.css';
+import MoodInput from './components/MoodInput';     
 import MoodSelector from './components/MoodSelector';
 import PlaylistView from './components/PlaylistView';
 
@@ -56,10 +57,15 @@ function App() {
     }
   };
 
+  // ... inside the App.js component ...
+
   return (
     <div className="App">
       <h1>Moodify</h1>
       <MoodSelector onMoodSelected={getPlaylist} />
+
+      {/* --- ADD THE NEW COMPONENT HERE --- */}
+      <MoodInput onMoodDetected={getPlaylist} />
 
       <AnimatePresence>
         {tracks.length > 0 && (
@@ -70,5 +76,7 @@ function App() {
   );
 }
 
-export default App;
+  export default App;
+
+ 
 
