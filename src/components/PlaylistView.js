@@ -20,9 +20,8 @@ const PlaylistView = ({ tracks }) => {
     >
       <h2>Generated Playlist</h2>
       <ul className="playlist">
-        {tracks.map(({ track }) => (
-          // Use track.id if available, otherwise fallback to uri for a unique key
-          <li key={track.id || track.uri} className="track">
+        {tracks.map(({ track }, index) => ( // <-- Add index here
+    <li key={track.id || track.uri || index} className="track"> 
             <span className="track-title">{track.name}</span>
             <span className="track-artist">{track.artists[0].name}</span>
           </li>

@@ -1,16 +1,90 @@
+/* ... Keep your existing .App and h1 styles ... */
 .App {
-  text-align: center; /* Center the text inside */
-  min-height: 100vh; /* Make the container at least the full height of the viewport */
-
-  /* Flexbox magic for perfect centering */
+  text-align: center;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow-x: hidden; /* Prevent scrollbars during animation */
 }
 
 .App h1 {
-  font-size: 3rem; /* Make the title larger */
-  margin-bottom: 2rem; /* Add some space below the title */
-  font-weight: 700; /* Bolder font weight */
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+
+/* --- New Page and Navigation Styles --- */
+.page {
+  width: 100%;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.back-button {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: background-color 0.2s;
+  align-self: flex-start; /* Align button to the left */
+}
+
+.back-button:hover {
+  background: #1DB954;
+}
+
+.playlist-page-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.mood-highlight {
+  color: #1DB954;
+  text-transform: capitalize;
+}
+
+/* --- Loading Spinner --- */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-overlay div {
+  width: 1rem;
+  height: 1rem;
+  margin: 2rem 0.3rem;
+  background: #fff;
+  border-radius: 50%;
+  animation: 0.9s bounce infinite alternate;
+}
+
+.loading-overlay div:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.loading-overlay div:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes bounce {
+  to {
+    opacity: 0.3;
+    transform: translate3d(0, -1rem, 0);
+  }
 }

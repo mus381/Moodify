@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Sentiment from 'sentiment'; // Import the library
 import './MoodInput.css'; // We'll create this next
 
-const MoodInput = ({ onMoodDetected }) => {
+const MoodInput = React.memo(({ onMoodDetected }) => {
   const [text, setText] = useState('');
   const sentiment = new Sentiment();
 
@@ -43,6 +43,6 @@ const MoodInput = ({ onMoodDetected }) => {
       </button>
     </div>
   );
-};
+});
 
 export default MoodInput;

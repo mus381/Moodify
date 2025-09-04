@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as faceapi from 'face-api.js';
 import './FaceMoodDetector.css';
 
-const FaceMoodDetector = ({ onMoodDetected }) => {
+const FaceMoodDetector = React.memo(({ onMoodDetected }) => {
   const [isModelsLoading, setIsModelsLoading] = useState(true);
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [detectedMood, setDetectedMood] = useState(null);
@@ -88,6 +88,6 @@ const FaceMoodDetector = ({ onMoodDetected }) => {
       {detectedMood && <p className="detected-mood-text">I see you're feeling {detectedMood}!</p>}
     </div>
   );
-};
+});
 
 export default FaceMoodDetector;

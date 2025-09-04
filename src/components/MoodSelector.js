@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import './MoodSelector.css';
 
-const MoodSelector = ({ onMoodSelected }) => {
+const MoodSelector = React.memo(({ onMoodSelected }) => {
   const moods = ['Happy', 'Chill', 'Focus', 'Workout', 'Sad'];
 
   // Animation variants for the container to orchestrate the children's animations
@@ -11,15 +11,15 @@ const MoodSelector = ({ onMoodSelected }) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1 // Each card animates 0.1s after the previous one
-      }
-    }
+        staggerChildren: 0.1, // Each card animates 0.1s after the previous one
+      },
+    },
   };
 
   // Animation variants for each individual card
   const cardVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1 }
+    visible: { y: 0, opacity: 1 },
   };
 
   return (
@@ -41,6 +41,6 @@ const MoodSelector = ({ onMoodSelected }) => {
       ))}
     </motion.div>
   );
-};
+});
 
 export default MoodSelector;
