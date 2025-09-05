@@ -1,31 +1,28 @@
 import React, { useState } from 'react';
-import Sentiment from 'sentiment'; // Import the library
-import './MoodInput.css'; // We'll create this next
+import Sentiment from 'sentiment';
+import './MoodInput.css';
 
 const MoodInput = React.memo(({ onMoodDetected }) => {
   const [text, setText] = useState('');
   const sentiment = new Sentiment();
 
   const handleAnalyzeClick = () => {
-    if (!text) return; // Don't do anything if the input is empty
+    if (!text) return;
 
     const result = sentiment.analyze(text);
     let mood;
 
-    // --- This is the core logic ---
-    // We map the sentiment score to one of our moods
     if (result.score > 2) {
       mood = 'happy';
     } else if (result.score < -2) {
       mood = 'sad';
     } else if (result.comparative > 0.5) {
-      mood = 'workout'; // High energy, positive
+      mood = 'workout';
     } else {
-      mood = 'chill'; // Default to chill for neutral or mild feelings
+      mood = 'chill';
     }
 
-    console.log(`Text: "${text}", Score: ${result.score}, Detected Mood: ${mood}`);
-    onMoodDetected(mood); // Send the detected mood back up to App.js
+    onMoodDetected(mood);
   };
 
   return (
@@ -46,3 +43,6 @@ const MoodInput = React.memo(({ onMoodDetected }) => {
 });
 
 export default MoodInput;
+
+
+

@@ -7,19 +7,21 @@ const FaceMoodDetector = React.memo(({ onMoodDetected }) => {
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [detectedMood, setDetectedMood] = useState(null);
   const videoRef = useRef();
-  // The unused canvasRef has been removed.
-
-  // Load AI models on component mount
+  
   useEffect(() => {
     const loadModels = async () => {
-      const MODEL_URL = '/models'; // This path is now correct
-      await Promise.all([
-        faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-        faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
-        faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
-        faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
-      ]);
-      setIsModelsLoading(false);
+      const MODEL_URL = '/models';
+      try {
+        await Promise.all([
+          faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+          faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+          faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+          faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+        ]);
+        setIsModelsLoading(false);
+      } catch (error) {
+        console.error("Failed to load face-api models:", error);
+      }
     };
     loadModels();
   }, []);
@@ -32,10 +34,7 @@ const FaceMoodDetector = React.memo(({ onMoodDetected }) => {
           setIsCameraOn(true);
         }
       })
-      .catch(err => {
-        console.error("Error accessing webcam:", err);
-        alert("Could not access the webcam. Please ensure you have a webcam connected and have granted permission.");
-      });
+      .catch(err => console.error("Camera access error:", err));
   };
   
   const handleVideoPlay = () => {
@@ -43,7 +42,7 @@ const FaceMoodDetector = React.memo(({ onMoodDetected }) => {
       if (videoRef.current && !videoRef.current.paused) {
         const detections = await faceapi.detectSingleFace(videoRef.current, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
         
-        if (detections && detections.expressions) {
+        if (detections) {
           const expressions = detections.expressions;
           const dominantExpression = Object.keys(expressions).reduce((a, b) => expressions[a] > expressions[b] ? a : b);
           
@@ -51,29 +50,23 @@ const FaceMoodDetector = React.memo(({ onMoodDetected }) => {
           
           let mood;
           switch(dominantExpression) {
-              case 'happy':
-                  mood = 'happy';
-                  break;
-              case 'sad':
-                  mood = 'sad';
-                  break;
-              case 'surprised':
-                  mood = 'workout'; // High energy
-                  break;
-              default:
-                  mood = 'chill';
+              case 'happy': mood = 'happy'; break;
+              case 'sad': mood = 'sad'; break;
+              case 'surprised': mood = 'workout'; break;
+              default: mood = 'chill';
           }
-
           onMoodDetected(mood);
           
           clearInterval(detectionInterval);
           if (videoRef.current && videoRef.current.srcObject) {
             videoRef.current.srcObject.getTracks().forEach(track => track.stop());
-            setIsCameraOn(false);
           }
+          setIsCameraOn(false);
         }
+      } else {
+        clearInterval(detectionInterval);
       }
-    }, 500); // Increased interval slightly for better performance
+    }, 500);
   };
 
   return (
@@ -83,11 +76,14 @@ const FaceMoodDetector = React.memo(({ onMoodDetected }) => {
         {isModelsLoading ? 'Loading AI...' : (isCameraOn ? 'Detecting...' : 'Start Camera')}
       </button>
       <div className="video-container">
-        <video ref={videoRef} autoPlay muted onPlay={handleVideoPlay} style={{ transform: 'scaleX(-1)' }}></video>
+        <video ref={videoRef} autoPlay muted onPlay={handleVideoPlay} playsInline></video>
       </div>
-      {detectedMood && <p className="detected-mood-text">I see you're feeling {detectedMood}!</p>}
+      {detectedMood && <p>Detected mood: {detectedMood}!</p>}
     </div>
   );
 });
 
 export default FaceMoodDetector;
+
+
+
