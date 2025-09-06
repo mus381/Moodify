@@ -10,9 +10,10 @@
     "dotenv": "^17.2.1",
     "face-api.js": "^0.22.2",
     "framer-motion": "^12.23.12",
+    "node-fetch": "^2.7.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "sentiment": "^5.0.2",
     "web-vitals": "^2.1.4",
     "zustand": "^5.0.8"
